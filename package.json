@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "workspaces": ["apps/backend", "apps/frontend"],
+
+  "name": "menu-management",
+  "version": "1.0.0",
+  "main": "index.js",
+   "scripts": {
+    "dev": "concurrently -n back,front -c blue,green \"npm --prefix apps/backend run start:dev\" \"npm --prefix apps/frontend run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

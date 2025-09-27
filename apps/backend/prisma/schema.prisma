@@ -1,0 +1,40 @@
+generator client {
+provider = "prisma-client-js"
+}
+
+
+datasource db {
+provider = "postgresql"
+url = env("DATABASE_URL")
+}
+
+
+model Menu {
+id String @id @default(cuid())
+name String
+items MenuItem[]
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
+
+model MenuItem {
+id String @id @default(cuid())
+menuId String
+parentId String?
+name String
+depth Int @default(0)
+position Int @default(0) // order within siblings
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+
+
+menu Menu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+parent MenuItem? @relation("ParentChildren", fields: [parentId], references: [id])
+children MenuItem[]@relation("ParentChildren")
+
+
+@@index([menuId])
+@@index([parentId])
+@@unique([menuId, parentId, position])
+}

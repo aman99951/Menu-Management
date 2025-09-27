@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+
+# env files
+*.env
+apps/backend/.env
+apps/frontend/.env
+apps/frontend/.env.local
+
+# build outputs
+dist/
+.next/
+out/
+coverage/
+
+# prisma sqlite (if used)
+apps/backend/prisma/dev.db*
