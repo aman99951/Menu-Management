@@ -2,7 +2,13 @@ import { BACKEND_URL } from "../config";
 
 export async function GET() {
   const res = await fetch(`${BACKEND_URL}/menus`, { cache: "no-store" });
-  return new Response(await res.text(), { status: res.status, headers: res.headers });
+  const text = await res.text();
+  return new Response(text, {
+    status: res.status,
+    headers: {
+      "content-type": res.headers.get("content-type") ?? "application/json",
+    },
+  });
 }
 
 export async function POST(req: Request) {
@@ -12,5 +18,11 @@ export async function POST(req: Request) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-  return new Response(await res.text(), { status: res.status, headers: res.headers });
+  const text = await res.text();
+  return new Response(text, {
+    status: res.status,
+    headers: {
+      "content-type": res.headers.get("content-type") ?? "application/json",
+    },
+  });
 }
