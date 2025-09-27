@@ -16,6 +16,7 @@ services:
       npm --prefix apps/backend run build
       npm --prefix apps/backend run db:push
       npm --prefix apps/backend run db:seed
+
     startCommand: |
       npm --prefix apps/backend run start
     healthCheckPath: /menus
