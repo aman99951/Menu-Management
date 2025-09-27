@@ -14,7 +14,6 @@ services:
       npm ci
       npm --prefix apps/backend run prisma generate
       npm --prefix apps/backend run build
-    # run db push every time before starting (idempotent)
     startCommand: |
       npm --prefix apps/backend run db:push && \
       npm --prefix apps/backend run start
@@ -27,10 +26,7 @@ services:
       - key: PORT
         value: "4000"
       - key: CORS_ORIGIN
-        fromService:
-          type: web
-          name: frontend
-          property: url
+        value: https://frontend.onrender.com   # update after first deploy
       - key: NODE_VERSION
         value: "20"
 
@@ -46,9 +42,6 @@ services:
       PORT=${PORT:-3000} npm --prefix apps/frontend run start -- -p $PORT
     envVars:
       - key: NEXT_PUBLIC_BACKEND_URL
-        fromService:
-          type: web
-          name: backend
-          property: url
+        value: https://backend.onrender.com   # update after first deploy
       - key: NODE_VERSION
         value: "20"
