@@ -25,8 +25,7 @@ services:
         fromDatabase:
           name: menudb
           property: connectionString
-      - key: PORT
-        value: "4000"
+     
       - key: CORS_ORIGIN
         value: https://frontend.onrender.com   # update after first deploy
       - key: NODE_VERSION
